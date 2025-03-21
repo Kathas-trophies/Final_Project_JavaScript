@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1>The greatest game ever conceived!</h1>
+    
+    <div>
+        <h2>Please set the number:</h2>
+        <button onclick="setNumber()">Set</button>
+        <h2 id="numberMessage"></h2>
+    </div>
+    <div>
+        <h2>How many guesses do you think you will need to be right?</h2>
+        <input type="number" id="guessAttempts">
+        <button onclick="guessAttempts()">Set Attempts</button>
+        <h2 id="guessAttemptMessage"></h2>
+
+    </div>
+    <div>
+        <h2>Submit your guess!</h2>
+        <input type="number" id="userGuess">
+        <button onclick="guessNumber()">Guess</button>
+        <h2 id="guessMessage"></h2>
+        <h3>Guess Amount: <b id="guessAmount">0</b></h3>
+    </div>
+
+    <script>
+       var numberToGuess = null;
+       var amount = 0;
+       var guessAttempted = 0;
+
+       function setNumber() {
+            numberToGuess = Math.floor(Math.random() * 11);
+            document.getElementById("numberMessage").innerHTML = "Number has been set. Good luck!";
+       }
+
+       function guessAttempts() {
+            guessAttempted = Number(document.getElementById("guessAttempts").value);
+            document.getElementById("guessAttemptMessage").innerHTML = "Your Guess Attempts have been set. Good luck!";
+
+        }
+
+       function guessNumber() {
+             amount++
+             document.getElementById("guessAmount").innerHTML = amount;
+
+            var userNumber = Number(document.getElementById("userGuess").value);
+            if(userNumber == numberToGuess){
+                document.getElementById("guessMessage").innerHTML = "You have won!"
+            } else {
+                document.getElementById("guessMessage").innerHTML = "Wrong number"
+            }
+            try {
+                if (amount >= guessAttempted && amount != numberToGuess) throw "You lost!";
+            } catch(err) {
+                alert(err);
+                return;
+            }
+
+        }
+
+       // Expansion 1: on the website, there should be a counter, that tells me, how often I have guessed. In the beginning it showes 0. Every time I guess, it should increase by one. 
+            //amount++
+            // document.getElementById("guessAmount").innerHTML = amount;
+
+       // Expansion 2: There is a maximum amount of guesses. If a player reaches that, they lose and are told so. 
+            /* if(amount <2){
+                document.getElementById("guessAmount").innerHTML = amount;
+
+             } else {
+                document.getElementById("guessAmount").innerHTML = amount + "Du hast verloren."; 
+                return; */
+
+            /* try {
+                if (amount >= 2) throw "You lost!";
+            } catch(err) {
+                alert(err);
+                return;
+            } */
+      
+        // Expansion 3: The player can define what the maximum amount of guesses is. 
+            /* function guessAttempts() {
+                    guessAttempted = Number(document.getElementById("guessAttempts").value);
+                    document.getElementById("guessAttemptMessage").innerHTML = "Your Guess Attempts have been set. Good luck!";
+
+                    try {
+                        if (amount >= guessAttempted && amount != numberToGuess) throw "You lost!";
+                    } catch(err) {
+                        alert(err);
+                        return;
+                    }
+                */        
+
+
+    </script>
+</body>
+</html>
